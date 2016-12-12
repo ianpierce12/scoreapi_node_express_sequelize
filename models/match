@@ -1,0 +1,27 @@
+'use strict';
+
+var Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+    var Match = sequelize.define('Match', {
+        id: {
+            type: Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        tournamentId: {
+            type: Sequelize.INTEGER,
+            field: 'tournament_id'
+        },
+        score: {
+            type: Sequelize.TEXT,
+        }
+    }, {
+        classMethods:{
+            associate: function(models) {
+                Match.belongsTo(models.Tournament);
+            }
+        }
+    });
+    return Match;
+}
+

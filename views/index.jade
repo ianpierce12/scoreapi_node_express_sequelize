@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+
+  h2 Create a new tournament
+  form(action="/tournaments/create", method="post")
+      input(type="text", name="key")
+      | key
+      br
+      input(type="text", name="name")
+      | name
+      br
+      input(type="submit")
+
+  h2 Tournaments
+
+  ul
+    each tournament in tournaments
+      li
+        a(href="/tournaments/"+tournament.id)
+          | tournament.name
+
