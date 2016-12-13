@@ -6,16 +6,10 @@ var models = require('./../models');
 router.get('/', function(req, res) {
   models.Tournament.findAll()
       .then(function(tournaments) {
-          console.log('tourn: ', tournaments);
 
           res.render('index', {
               title: 'Viewing all tournaments',
               tournaments: tournaments
-          });
-
-          res.render('index', {
-              title: 'There are no matches to view currently',
-              matches: null
           });
   });
 

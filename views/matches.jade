@@ -1,0 +1,10 @@
+extends layout
+
+block content
+
+    h1 Current Matches
+
+    ul
+        each match in matches
+            li
+                p #{match.score}

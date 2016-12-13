@@ -17,12 +17,34 @@ router.post('/create', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-    models.Tournament.findById(req.param.id)
+    models.Tournament.find({
+        where: { id: req.params.id }
+    })
         .then(function(tournament){
             res.render('tournament', {
-                name: tournament.name
+                tournament: tournament
+            });
+        });
+});
+
+router.get('/:id/matches', function(req, res) {
+    models.Match.findAll({
+        where: {tournamentId: req.params.id }
+    })
+        .then(function(matches){
+            res.render('matches', {
+                matches: matches
             })
         })
+})
+
+router.post('/:id/matches/create', function(req, res){
+    models.Match.create({
+        tournamentId: req.params.id,
+        score: req.body.score
+    }).then(function() {
+        res.redirect('/tournaments/'+ req.params.id);
+    });
 })
 
 module.exports = router;

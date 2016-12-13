@@ -2,4 +2,14 @@ extends layout
 
 block content
 
-    h1= name
+    h1 #{tournament.name}
+
+    h2 Enter a new score
+    form(action=("/tournaments/" + tournament.id + "/matches/create"), method="post")
+        input(type="text", name="score")
+        | score
+        input(type="submit")
+
+
+    a(href = "/tournaments/" + tournament.id + "/matches")
+        p Click to view matches
